@@ -4,6 +4,7 @@ import * as React from "react"
 import dynamic from "next/dynamic"
 import { cn } from "cn"
 
+import { Bienvenida } from "@/components/etl/bienvenida"
 import { FondoLiquido } from "@/components/etl/fondo-liquido"
 import type { PestanaId } from "@/components/etl/pipeline"
 import { ScrollSuave } from "@/components/etl/scroll-suave"
@@ -77,6 +78,8 @@ function SelectorVista({ vista, onCambiar }: { vista: Vista; onCambiar: (v: Vist
 
 export function AreaTrabajo() {
   const vista = React.useSyncExternalStore(suscribirVista, leerVista, () => "sencilla" as Vista)
+  // La bienvenida sale en cada carga de la página (también en el HTML del servidor, sin parpadeo).
+  const [bienvenida, setBienvenida] = React.useState(true)
   const etl = usePipelineEtl()
   const supabase = useEstadoSupabase(etl.versionDestino)
   // Pestaña que se abre al pasar a la vista completa desde «Ver lo guardado».
@@ -97,6 +100,14 @@ export function AreaTrabajo() {
       <ScrollSuave />
       <FondoLiquido />
       <SelectorVista vista={vista} onCambiar={cambiarVista} />
+      {bienvenida && (
+        <Bienvenida
+          onElegir={(v) => {
+            cambiarVista(v)
+            setBienvenida(false)
+          }}
+        />
+      )}
 
       {vista === "sencilla" ? (
         <>
