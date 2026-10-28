@@ -4,6 +4,7 @@ import * as React from "react"
 import { DownloadIcon, ListChecksIcon, RotateCwIcon, UploadCloudIcon } from "lucide-react"
 
 import { EstadoBadge, Nota } from "@/components/etl/estado"
+import { motivoBloqueo } from "@/components/etl/motivo-bloqueo"
 import { columnasMedicion } from "@/components/etl/pestana-validos"
 import { TablaPaginada, type Columna } from "@/components/etl/tabla-paginada"
 import { Button } from "@/components/ui/button"
@@ -49,24 +50,6 @@ function Verificacion({ lote }: { lote: EstadoLote }) {
   }
 }
 
-/** Motivo por el que no se puede subir ahora mismo, o null si se puede. */
-function motivoBloqueo(etl: PipelineEtl, supabase: EstadoSupabase | null): string | null {
-  if (!etl.procesamiento) return "Primero pulsa «Extraer datos»."
-  if (etl.extraccion?.estado === "en_curso") return "Espera a que termine la extracción."
-  if (etl.carga?.enCurso) return null
-  if (!supabase) return "Comprobando la conexión con Supabase…"
-  if (!supabase.cargaPermitida) {
-    return "La escritura está deshabilitada en producción porque la aplicación no tiene autenticación (ver README)."
-  }
-  if (!supabase.configurado || !supabase.tablaDisponible) return supabase.mensaje
-  if (etl.filtrado.errores.length > 0) return "Corrige los filtros no válidos."
-  if (etl.vistaPrevia.length === 0) {
-    return etl.seleccion.fueraDeFiltros > 0
-      ? "Las filas seleccionadas no cumplen los filtros actuales: ajusta los filtros o selecciona otras."
-      : "No hay filas seleccionadas. Marca filas en «Válidos y selección» o selecciona todas las filtradas."
-  }
-  return null
-}
 
 /** Botón de carga siempre visible, con el motivo cuando está desactivado. */
 export function BarraCarga({
@@ -89,7 +72,7 @@ export function BarraCarga({
   return (
     <section
       aria-label="Carga en Supabase"
-      className="flex flex-col gap-2 rounded-xl border border-primary/40 bg-primary/5 p-3 sm:flex-row sm:items-center"
+      className="flex flex-col gap-3 rounded-[18px] bg-linear-to-r from-marino to-azul p-4 text-white shadow-[0_8px_28px_rgb(2_62_125/0.25),inset_0_1px_0_rgb(255_255_255/0.25)] ring-1 ring-white/10 sm:flex-row sm:items-center"
     >
       <Button
         size="lg"
@@ -98,17 +81,18 @@ export function BarraCarga({
           void etl.acciones.subir()
         }}
         disabled={motivo !== null || enCurso}
+        className="bg-white text-marino hover:bg-white/90 disabled:bg-white/25 disabled:text-white"
       >
         <UploadCloudIcon data-icon="inline-start" />
         {enCurso ? "Subiendo…" : `Subir ${formatoEntero(n)} registros a Supabase`}
       </Button>
-      <p className="flex-1 text-xs text-muted-foreground" aria-live="polite">
+      <p className="flex-1 text-xs text-white/80" aria-live="polite">
         {enCurso
           ? "Carga en curso: puedes seguir su estado lote a lote en «Vista previa de la carga»."
           : motivo ?? `${Math.ceil(n / TAMANO_LOTE)} lote(s) de hasta ${TAMANO_LOTE} · upsert por (ciudad, fecha_hora) · se sube exactamente la vista previa.`}
       </p>
       {puedeSeleccionar && (
-        <Button variant="outline" size="sm" onClick={etl.seleccion.seleccionarFiltradas}>
+        <Button variant="outline" size="sm" className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white" onClick={etl.seleccion.seleccionarFiltradas}>
           <ListChecksIcon data-icon="inline-start" />
           Seleccionar las {formatoEntero(etl.filtrado.ordenados.length)} filtradas
         </Button>
@@ -166,7 +150,7 @@ export function PestanaCarga({ etl, supabase }: { etl: PipelineEtl; supabase: Es
       </BarraCarga>
 
       {carga && r && (
-        <section aria-label="Estado de la carga" className="flex flex-col gap-3 rounded-xl border p-3">
+        <section aria-label="Estado de la carga" className="tarjeta flex flex-col gap-3 p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="font-medium">Carga congelada: {formatoEntero(r.total)} registros en {carga.lotes.length} lote(s)</h3>
             {hayFallidos && !enCurso && (

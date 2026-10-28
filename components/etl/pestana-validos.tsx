@@ -92,7 +92,7 @@ export function PestanaValidos({ etl }: { etl: PipelineEtl }) {
         La paginación solo afecta a lo que ves. Cambiar los filtros nunca selecciona filas nuevas.
       </Nota>
 
-      <section aria-label="Filtros" className="flex flex-col gap-3 rounded-xl border p-3">
+      <section aria-label="Filtros" className="tarjeta flex flex-col gap-3 p-4">
         <fieldset>
           <legend className="mb-2 text-xs font-medium">Ciudades</legend>
           <div className="flex flex-wrap gap-x-4 gap-y-2">

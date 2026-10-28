@@ -61,6 +61,21 @@ export function EstadoBadge({
   )
 }
 
+/** Número de sección en un círculo; cada sección usa un tono de la paleta. */
+export function NumeroSeccion({ n, className }: { n: number; className?: string }) {
+  return (
+    <span
+      className={cn(
+        "mr-2.5 inline-flex size-9 -translate-y-0.5 items-center justify-center rounded-full align-middle text-base font-semibold text-white shadow-sm",
+        className
+      )}
+      aria-hidden
+    >
+      {n}
+    </span>
+  )
+}
+
 export function Nota({ children, className }: { children: React.ReactNode; className?: string }) {
   return <p className={cn("text-xs leading-relaxed text-muted-foreground", className)}>{children}</p>
 }

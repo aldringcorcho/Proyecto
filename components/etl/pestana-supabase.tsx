@@ -124,7 +124,7 @@ export function PestanaSupabase({
         </Alert>
       )}
 
-      <div className="flex flex-wrap items-end gap-3 rounded-xl border p-3">
+      <div className="tarjeta flex flex-wrap items-end gap-3 p-4">
         <label className="flex flex-col gap-1 text-xs font-medium">
           Ciudad
           <NativeSelect className="w-36" value={ciudad} onChange={(e) => filtro(setCiudad)(e.target.value)}>

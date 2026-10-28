@@ -4,6 +4,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Paleta completa como utilidades (bg-azul, text-marino, from-prusia-3…). */
+@theme {
+    --color-azul: #0466c8;         /* Smart Blue */
+    --color-acero: #0353a4;        /* Steel Azure */
+    --color-marino: #023e7d;       /* Regal Navy */
+    --color-prusia-1: #002855;     /* Prussian Blue */
+    --color-prusia-2: #001845;     /* Prussian Blue */
+    --color-prusia-3: #001233;     /* Prussian Blue */
+    --color-indigo-noche: #33415c; /* Twilight Indigo */
+    --color-pizarra: #5c677d;      /* Blue Slate */
+    --color-gris-pizarra: #7d8597; /* Slate Grey */
+    --color-acero-frio: #979dac;   /* Cool Steel */
+}
+
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: var(--font-sans);
@@ -48,72 +62,115 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    /* Paleta: Smart Blue #0466c8 · Steel Azure #0353a4 · Regal Navy #023e7d · Prussian Blue #002855 / #001845 / #001233
+       · Twilight Indigo #33415c · Blue Slate #5c677d · Slate Grey #7d8597 · Cool Steel #979dac */
+    --background: #f5f5f7;
+    --foreground: #001233;
+    --card: #ffffff;
+    --card-foreground: #001233;
+    --popover: #ffffff;
+    --popover-foreground: #001233;
+    --primary: #0466c8;
+    --primary-foreground: #ffffff;
+    --secondary: #e8f0fa;
+    --secondary-foreground: #023e7d;
+    --muted: #eef0f4;
+    --muted-foreground: #5c677d;
+    --accent: #e8f0fa;
+    --accent-foreground: #023e7d;
+    --destructive: #c62828;
+    --border: #e1e4ea;
+    --input: #c9cdd6;
+    --ring: #0466c8;
+    --chart-1: #0466c8;
+    --chart-2: #0353a4;
+    --chart-3: #023e7d;
+    --chart-4: #7d8597;
+    --chart-5: #979dac;
+    --radius: 0.875rem;
+    --sombra-tarjeta: 0 18px 40px -12px rgb(0 18 51 / 0.28), 0 3px 10px rgb(0 18 51 / 0.08);
+    --sombra-tarjeta-hover: 0 24px 50px -12px rgb(0 18 51 / 0.36), 0 4px 12px rgb(0 18 51 / 0.1);
+    --vidrio: rgb(234 237 242 / 0.75);
+    --vidrio-fuerte: rgb(240 242 246 / 0.88);
+    --vidrio-borde: rgb(170 180 198 / 0.8);
+    --vidrio-brillo: rgb(255 255 255 / 0.9);
+    --vidrio-reflejo: rgb(255 255 255 / 0.5);
+    --vidrio-canto: rgb(255 255 255 / 0.95);
+    --sidebar: #ffffff;
+    --sidebar-foreground: #001233;
+    --sidebar-primary: #0466c8;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #e8f0fa;
+    --sidebar-accent-foreground: #023e7d;
+    --sidebar-border: #e1e4ea;
+    --sidebar-ring: #0466c8;
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --background: #001233;
+    --foreground: #f5f5f7;
+    --card: #001845;
+    --card-foreground: #f5f5f7;
+    --popover: #001845;
+    --popover-foreground: #f5f5f7;
+    --primary: #0466c8;
+    --primary-foreground: #ffffff;
+    --secondary: #002855;
+    --secondary-foreground: #f5f5f7;
+    --muted: #002855;
+    --muted-foreground: #979dac;
+    --accent: #002855;
+    --accent-foreground: #f5f5f7;
+    --destructive: #ef6b6b;
+    --border: #33415c;
+    --input: #33415c;
+    --ring: #0466c8;
+    --chart-1: #0466c8;
+    --chart-2: #0353a4;
+    --chart-3: #979dac;
+    --chart-4: #7d8597;
+    --chart-5: #5c677d;
+    --sombra-tarjeta: 0 2px 12px rgb(0 0 0 / 0.3);
+    --sombra-tarjeta-hover: 0 8px 28px rgb(0 0 0 / 0.45);
+    --vidrio: rgb(0 24 69 / 0.55);
+    --vidrio-fuerte: rgb(0 24 69 / 0.8);
+    --vidrio-borde: rgb(255 255 255 / 0.1);
+    --vidrio-brillo: rgb(255 255 255 / 0.12);
+    --vidrio-reflejo: rgb(255 255 255 / 0.08);
+    --vidrio-canto: rgb(255 255 255 / 0.25);
+    --sidebar: #001845;
+    --sidebar-foreground: #f5f5f7;
+    --sidebar-primary: #0466c8;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #002855;
+    --sidebar-accent-foreground: #f5f5f7;
+    --sidebar-border: #33415c;
+    --sidebar-ring: #0466c8;
+}
+
+/* Tarjeta al estilo Apple: blanca, sin borde, esquinas amplias y sombra suave. */
+@utility tarjeta {
+  position: relative;
+  border-radius: 18px;
+  background-color: var(--vidrio);
+  /* Reflejo especular arriba a la izquierda (luz sobre cristal curvo) y reflejo en diagonal. */
+  background-image: radial-gradient(120% 70% at 12% 0%, rgb(255 255 255 / 0.32), transparent 46%),
+    linear-gradient(135deg, var(--vidrio-reflejo), transparent 42%);
+  border: 1px solid var(--vidrio-borde);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  /* Brillo en el canto superior y sombra interior abajo: el volumen del «liquid glass». */
+  box-shadow: var(--sombra-tarjeta), inset 0 1px 0 var(--vidrio-brillo), inset 0 -1px 0 rgb(255 255 255 / 0.25),
+    inset 0 -18px 30px -24px rgb(4 102 200 / 0.18);
+}
+
+@utility vidrio {
+  background-color: var(--vidrio-fuerte);
+  background-image: linear-gradient(135deg, var(--vidrio-reflejo), transparent 50%);
+  border: 1px solid var(--vidrio-borde);
+  -webkit-backdrop-filter: blur(18px) saturate(185%);
+  backdrop-filter: blur(18px) saturate(185%);
+  box-shadow: 0 16px 36px -10px rgb(0 18 51 / 0.3), 0 3px 10px rgb(0 18 51 / 0.08), inset 0 1px 0 var(--vidrio-brillo), inset 0 -1px 0 rgb(255 255 255 / 0.3);
 }
 
 @layer base {
@@ -122,8 +179,191 @@
     }
   body {
     @apply bg-background text-foreground;
+    background-color: #e3e8ef;
+    background-image:
+      radial-gradient(60rem 42rem at 6% -8%, rgb(3 83 164 / 0.26), transparent 62%),
+      radial-gradient(52rem 40rem at 100% 14%, rgb(51 65 92 / 0.24), transparent 60%),
+      radial-gradient(46rem 36rem at 20% 74%, rgb(151 157 172 / 0.5), transparent 62%),
+      radial-gradient(50rem 38rem at 90% 98%, rgb(92 103 125 / 0.22), transparent 60%),
+      radial-gradient(36rem 28rem at 52% 40%, rgb(255 255 255 / 0.65), transparent 70%);
+    background-attachment: fixed;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-sans), "Helvetica Neue", sans-serif;
+    }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label:has(input:not(:disabled)),
+  label:has([role="checkbox"]:not([data-disabled])) {
+    cursor: pointer;
+    }
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+    }
+  h1, h2, h3 {
+    letter-spacing: -0.015em;
     }
   html {
     @apply font-sans;
+    font-size: 112.5%;
     }
+
+}
+/* Mapa: el punto de la ciudad que se está descargando late. */
+.punto-descargando {
+  animation: latido-punto 1.1s ease-in-out infinite;
+}
+
+@keyframes latido-punto {
+  0%, 100% { stroke-width: 2; stroke-opacity: 1; }
+  50% { stroke-width: 14; stroke-opacity: 0.2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .punto-descargando { animation: none; stroke-width: 6; }
+}
+
+
+/* Mapa: etiqueta de la ciudad cuya ficha está abierta. */
+.leaflet-tooltip.etiqueta-activa {
+  background: #023e7d;
+  border-color: #023e7d;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgb(0 18 51 / 0.3);
+}
+.leaflet-tooltip-top.etiqueta-activa::before { border-top-color: #023e7d; }
+.leaflet-tooltip-bottom.etiqueta-activa::before { border-bottom-color: #023e7d; }
+.leaflet-tooltip-left.etiqueta-activa::before { border-left-color: #023e7d; }
+.leaflet-tooltip-right.etiqueta-activa::before { border-right-color: #023e7d; }
+
+/* Mapa: controles y etiquetas de vidrio. */
+.leaflet-tooltip {
+  background: rgb(255 255 255 / 0.72);
+  border: 1px solid rgb(255 255 255 / 0.8);
+  -webkit-backdrop-filter: blur(10px) saturate(170%);
+  backdrop-filter: blur(10px) saturate(170%);
+  box-shadow: 0 4px 14px rgb(0 18 51 / 0.14), inset 0 1px 0 rgb(255 255 255 / 0.9);
+  border-radius: 10px;
+}
+.leaflet-tooltip-top::before { border-top-color: rgb(255 255 255 / 0.72); }
+.leaflet-tooltip-bottom::before { border-bottom-color: rgb(255 255 255 / 0.72); }
+.leaflet-tooltip-left::before { border-left-color: rgb(255 255 255 / 0.72); }
+.leaflet-tooltip-right::before { border-right-color: rgb(255 255 255 / 0.72); }
+.leaflet-touch .leaflet-bar {
+  border: 1px solid rgb(255 255 255 / 0.8);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgb(0 18 51 / 0.14);
+}
+.leaflet-touch .leaflet-bar a {
+  background: rgb(255 255 255 / 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #023e7d;
+}
+.leaflet-control-attribution {
+  background: rgb(255 255 255 / 0.6) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-top-left-radius: 8px;
+}
+
+/* Canto de luz del vidrio: un borde en degradado (brillante arriba a la izquierda, casi invisible
+   abajo a la derecha) dibujado con una máscara para que solo ocupe el contorno. */
+.tarjeta::before,
+.vidrio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, var(--vidrio-canto), transparent 38%, transparent 62%, rgb(92 103 125 / 0.35));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+/* Fondo líquido: cada mancha deriva despacio en un bucle largo. */
+.mancha-liquida {
+  animation: deriva-liquida 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes deriva-liquida {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(6vw, 4vh, 0) scale(1.08); }
+  66% { transform: translate3d(-4vw, 7vh, 0) scale(0.95); }
+  100% { transform: translate3d(3vw, -5vh, 0) scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mancha-liquida { animation: none; }
+}
+
+/* Mapa: efecto al pasar el cursor por una ciudad. El punto crece con un halo y su etiqueta se eleva. */
+.leaflet-overlay-pane path.leaflet-interactive {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.22s ease;
+}
+.leaflet-overlay-pane path.leaflet-interactive.punto-hover {
+  transform: scale(1.35);
+  filter: drop-shadow(0 0 6px rgb(4 102 200 / 0.75)) drop-shadow(0 2px 4px rgb(0 18 51 / 0.3));
+}
+.leaflet-tooltip {
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.leaflet-tooltip.etiqueta-hover {
+  z-index: 1000;
+  background: rgb(255 255 255 / 0.95);
+  border-color: #0466c8;
+  box-shadow: 0 8px 22px rgb(4 102 200 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.9);
+}
+.leaflet-tooltip-top.etiqueta-hover::before { border-top-color: #0466c8; }
+.leaflet-tooltip-bottom.etiqueta-hover::before { border-bottom-color: #0466c8; }
+.leaflet-tooltip-left.etiqueta-hover::before { border-left-color: #0466c8; }
+.leaflet-tooltip-right.etiqueta-hover::before { border-right-color: #0466c8; }
+@media (prefers-reduced-motion: reduce) {
+  .leaflet-overlay-pane path.leaflet-interactive { transition: none; }
+}
+
+/* Vidrio líquido con refracción: una capa propia desenfoca y deforma lo que hay detrás.
+   (La deformación SVG se ve en Chrome y Edge; en otros navegadores queda el vidrio normal.) */
+.vidrio-liquido {
+  isolation: isolate;
+  background-color: rgb(255 255 255 / 0.47);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.vidrio-liquido::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  -webkit-backdrop-filter: blur(6px) saturate(190%) brightness(1.06);
+  backdrop-filter: blur(6px) saturate(190%) brightness(1.06);
+  filter: url(#refraccion-vidrio);
+  pointer-events: none;
+}
+
+/* Cabecera de vidrio azul tintado: deja ver el fondo líquido a través. */
+.cabecera-vidrio {
+  background-image:
+    radial-gradient(90% 120% at 0% 0%, rgb(255 255 255 / 0.22), transparent 45%),
+    linear-gradient(135deg, rgb(0 18 51 / 0.95), rgb(2 62 125 / 0.89) 50%, rgb(51 65 92 / 0.83));
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  box-shadow: 0 18px 50px rgb(0 18 51 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.35), inset 0 -1px 0 rgb(255 255 255 / 0.1);
+}
+
+/* Mapa de puntos: la línea entre ciudades elegidas avanza como un flujo de datos. */
+.ruta-animada {
+  animation: avance-ruta 2.2s linear infinite;
+}
+@keyframes avance-ruta {
+  to { stroke-dashoffset: -1.2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ruta-animada { animation: none; }
 }

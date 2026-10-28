@@ -31,6 +31,9 @@ function ValorCrudo({ valor }: { valor: unknown }) {
   )
 }
 
+/** Elementos de cada array que se muestran en la vista previa del JSON (un día). */
+const HORAS_VISTA_PREVIA = 24
+
 function SinDatos() {
   return <p className="py-6 text-sm text-muted-foreground">Ejecuta una extracción para ver datos.</p>
 }
@@ -38,6 +41,7 @@ function SinDatos() {
 export function PestanaJson({ etl }: { etl: PipelineEtl }) {
   const ex = etl.extraccion
   const [elegida, setElegida] = React.useState<string | null>(null)
+  const [completo, setCompleto] = React.useState(false)
   if (!ex) return <SinDatos />
 
   const actual = ex.ciudades.find((r) => r.ciudadId === elegida) ?? ex.ciudades[0]
@@ -123,8 +127,30 @@ export function PestanaJson({ etl }: { etl: PipelineEtl }) {
             <code>hourly</code> contiene arrays paralelos: la posición <em>i</em> de cada array
             corresponde a la hora <code>time[i]</code>.
           </Nota>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div role="group" aria-label="Cantidad de datos mostrada" className="inline-flex rounded-full bg-secondary p-1 text-xs">
+              {[
+                { id: false, texto: `Vista previa (${HORAS_VISTA_PREVIA} primeras horas)` },
+                { id: true, texto: "Respuesta completa" },
+              ].map((o) => (
+                <button
+                  key={String(o.id)}
+                  type="button"
+                  aria-pressed={completo === o.id}
+                  onClick={() => setCompleto(o.id)}
+                  className={cn(
+                    "rounded-full px-3 py-1 font-medium transition-colors",
+                    completo === o.id ? "bg-card text-marino shadow-sm" : "text-pizarra hover:text-marino"
+                  )}
+                >
+                  {o.texto}
+                </button>
+              ))}
+            </div>
+            <span className="text-xs text-muted-foreground">La descarga incluye siempre la respuesta completa.</span>
+          </div>
           <pre className="max-h-[28rem] overflow-auto rounded-lg border bg-muted/40 p-3 font-mono text-xs leading-relaxed break-all whitespace-pre-wrap">
-            {formatoJsonCompacto(actual.respuesta)}
+            {formatoJsonCompacto(actual.respuesta, "", completo ? undefined : HORAS_VISTA_PREVIA)}
           </pre>
         </>
       )}

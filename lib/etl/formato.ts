@@ -34,21 +34,25 @@ export function formatoValorCrudo(v: unknown): string {
 
 /**
  * JSON legible con los arrays de primitivos en una sola línea, para que una
- * respuesta de 744 horas no ocupe miles de líneas.
+ * respuesta de 744 horas no ocupe miles de líneas. Con `limite`, esos arrays
+ * se recortan a sus primeros elementos y se indica cuántos faltan (vista previa:
+ * ya no es JSON válido, pero no oculta que hay más datos).
  */
-export function formatoJsonCompacto(valor: unknown, sangria = ""): string {
+export function formatoJsonCompacto(valor: unknown, sangria = "", limite?: number): string {
   const siguiente = sangria + "  "
   if (Array.isArray(valor)) {
     if (valor.every((x) => x === null || typeof x !== "object")) {
-      return `[${valor.map((x) => JSON.stringify(x) ?? "null").join(", ")}]`
+      const visibles = limite !== undefined && valor.length > limite ? valor.slice(0, limite) : valor
+      const resto = valor.length - visibles.length
+      return `[${visibles.map((x) => JSON.stringify(x) ?? "null").join(", ")}${resto > 0 ? `, … (+${resto} más)` : ""}]`
     }
-    return `[\n${valor.map((x) => siguiente + formatoJsonCompacto(x, siguiente)).join(",\n")}\n${sangria}]`
+    return `[\n${valor.map((x) => siguiente + formatoJsonCompacto(x, siguiente, limite)).join(",\n")}\n${sangria}]`
   }
   if (valor && typeof valor === "object") {
     const entradas = Object.entries(valor)
     if (entradas.length === 0) return "{}"
     return `{\n${entradas
-      .map(([k, v]) => `${siguiente}${JSON.stringify(k)}: ${formatoJsonCompacto(v, siguiente)}`)
+      .map(([k, v]) => `${siguiente}${JSON.stringify(k)}: ${formatoJsonCompacto(v, siguiente, limite)}`)
       .join(",\n")}\n${sangria}}`
   }
   return JSON.stringify(valor) ?? "null"

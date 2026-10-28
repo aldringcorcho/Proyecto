@@ -95,10 +95,10 @@ export function TablaPaginada<T>({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="overflow-x-auto rounded-lg border">
+      <div className="tarjeta overflow-x-auto">
         <Table aria-label={etiqueta}>
           <TableHeader>
-            <TableRow className="bg-muted/50 hover:bg-muted/50">
+            <TableRow className="bg-secondary hover:bg-secondary [&_th]:text-marino">
               {prefijo && <TableHead className="w-10">{prefijo.encabezado(filasPagina)}</TableHead>}
               {columnas.map((c) => {
                 const ordenable = onOrdenar && ordenables.includes(c.id)

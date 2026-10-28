@@ -20,6 +20,7 @@ import {
   filtrosIniciales,
   paginar,
 } from "@/lib/etl/filtrado"
+import { formatoJsonCompacto } from "@/lib/etl/formato"
 import { claveMedicion, limpiar } from "@/lib/etl/limpieza"
 import type { Medicion, RespuestaOpenMeteo } from "@/lib/etl/tipos"
 import {
@@ -339,5 +340,19 @@ describe("validación en servidor", () => {
     expect(validarPeticionCarga({ registros: [{ ...ok, ciudad: "Lugo" }] })).toMatchObject({ error: /ciudad/ })
     expect(validarPeticionCarga({ registros: [{ ...ok, fecha_hora: "2026-09-01T00:00" }] })).toMatchObject({ error: /zona/ })
     expect(validarPeticionCarga({ registros: [ok, ok] })).toMatchObject({ error: /duplicada/ })
+  })
+})
+
+describe("vista previa del JSON", () => {
+  const respuesta = { hourly: { time: ["a", "b", "c", "d"], temperature_2m: [1, null, 3, 4] } }
+
+  it("recorta los arrays largos e indica cuántos valores faltan", () => {
+    const texto = formatoJsonCompacto(respuesta, "", 2)
+    expect(texto).toContain('["a", "b", … (+2 más)]')
+    expect(texto).toContain("[1, null, … (+2 más)]")
+  })
+
+  it("sin límite muestra todo y sigue siendo JSON válido", () => {
+    expect(JSON.parse(formatoJsonCompacto(respuesta))).toEqual(respuesta)
   })
 })
